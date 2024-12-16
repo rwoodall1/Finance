@@ -5,3 +5,5 @@
 /.vs
 /Services/bin/Debug
 /Services/obj
+/WebApp/ClientApp/.angular/cache/19.0.2/angular-webpack/282e7499905a37c26f1511cf1296609bdd330288
+/WebApp/ClientApp/.angular/cache/19.0.2/babel-webpack
