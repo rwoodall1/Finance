@@ -1,0 +1,50 @@
+{
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "rootDir": "./src",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+
+    "jsx": "react",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+
+
+    "strictNullChecks": false,
+    "noImplicitReturns": false,
+    "strictFunctionTypes": false, /* Enable strict checking of function types. */
+    "strictBindCallApply": false, /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+    "strictPropertyInitialization": false, /* Enable strict checking of property initialization in classes. */
+    "noImplicitThis": true,
+    "target": "es2022",
+    "module": "es2022",
+    "lib": [
+      "es2022",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": false,
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": false,
+    "paths": {
+      "@angular/*": [ "./node_modules/@angular/*" ]
+    }
+  }
+}

@@ -1,0 +1,85 @@
+<mat-spinner *ngIf="showSpinner" style="margin-left:50%;margin-bottom:10px" class="custom-spinner" color="primary" diameter="30"></mat-spinner>
+<div *ngIf="displayedUsers ==null || displayedUsers.length<1" class="notificationheader">
+  <h3 style="text-align:center">There are no users available to view.</h3>
+  <br />
+  <div style="text-align:center">
+    <button [route]="" (click)="addModifyUser('add')" style="margin-top:10px" class="btn-primary btn-sm ">Add User</button>
+  </div>
+
+</div>
+<app-addmodifyadminuser *ngIf="!showlist" [addModify]="addModify" (refreshDataEvent)="getAdminUsers()" (showListEvent)="showlist=$event" [currentUser]="currentUser"></app-addmodifyadminuser>
+<div *ngIf="displayedUsers !=null && displayedUsers.length>0" class="row">
+  <div *ngIf="showlist">
+
+    <div class="col-md-12 container tablecontainer">
+
+    <div class="cartTable"  style="margin-bottom:7px">
+        <!--<label for="search">Search:</label>
+    <input #searchValue (input)="search(searchValue.value)" style="margin-left:5px;margin-right:5px" type="text" id="searchValue" name="searchValue">-->
+        <mat-form-field class="w-50" style="margin-right:5px" appearance="outline">
+          <mat-label>Search:</mat-label>
+          <input matInput placeholder="search" name="search" [(ngModel)]="searchValue" search="ngModel" (input)="search()">
+        </mat-form-field>
+
+        <mat-radio-group [(ngModel)]="searchType">
+          <mat-radio-button style="margin-right:5px" value="Name">Last Name</mat-radio-button>
+          <mat-radio-button value="Email">Email Address</mat-radio-button>
+        </mat-radio-group>
+
+
+
+      </div>
+
+      <div class="cartTable" style="text-align:right;margin-bottom:3px"> <button [route]="" (click)="addModifyUser('add')" style="margin-top:10px" class="btn-primary btn-sm ">Add User</button></div>
+
+      <table style="margin-bottom:25px" id="cartTable" class="cartTable">
+        <tr>
+          <th style="font-size: large; padding-left: 5px; border: solid; border-width: 1px; text-align: left; font-weight: bold; background-color: lightgrey !important; color: black" colspan="7"><span class="col-md-6">Admin Users</span> </th>
+        </tr>
+        <tr>
+          <th style="font-size: small; border: solid; border-width: 1px; text-align: center; font-weight: bold; background-color: whitesmoke; color: black;width:8%">
+
+          </th>
+          <th style="font-size: small; border: solid; border-width: 1px; text-align: center; font-weight: bold; background-color: whitesmoke; color: black;width:8%">
+            <a (click)="sortOrder('name')">Last Name </a>
+          </th>
+          <th style="font-size: small; border: solid; border-width: 1px; text-align: center; font-weight: bold; background-color: whitesmoke; color: black;width:10%">
+            First Name
+          </th>
+          <th style="font-size: small; border: solid; border-width: 1px; text-align: center; font-weight: bold; background-color: whitesmoke; color: black;width:10%">
+            Role
+          </th>
+
+          <th style="font-size: small; border: solid; border-width: 1px; text-align: center; font-weight: bold; background-color: whitesmoke; color: black;width:20%">
+            <a (click)="sortOrder('email')">Email Address </a>
+          </th>
+
+        </tr>
+        <tbody>
+          <tr *ngFor="let user of displayedUsers" style="height:30px">
+            <td style="font-size: small;text-align: center; border: solid; border-style: solid; border-width: thin; color: black">
+              <a [routerLink]=[] (click)="addModifyUser('modify',user)">  Edit</a>
+
+            </td>
+            <td style="font-size: small;text-align: center; border: solid; border-style: solid; border-width: thin; color: black">
+              {{user.lastName}}
+
+            </td>
+            <td style="font-size:small;border:solid;border-style:solid;border-width:thin;text-align: center;color: black">
+              {{user.firstName}}
+            </td>
+            <td style="font-size:small;border:solid;border-style:solid;border-width:thin;text-align: center;color: black">
+              {{user.role}}
+            </td>
+            <td class="cellContent" style="font-size:small;border:solid;border-style:solid;border-width:thin;text-align: center;color: black">
+              {{user.emailAddress}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  
+</div>
+

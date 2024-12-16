@@ -1,0 +1,70 @@
+
+<form role="form" class="form-horizontal" name="modifyAccountForm" #modifyAccountForm="ngForm" novalidate>
+
+  <div *ngIf="loaded">
+   
+    <div class="col-md-7">
+      <h3>Edit Account</h3>
+      <hr />
+    
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Account Type</mat-label>
+        <mat-select [(ngModel)]="account.accountTypeId"(selectionChange)="setTypeName($event)" name="type" #type="ngModel" required>
+          <mat-option *ngFor="let accounttype of accountTypes" [value]="accounttype.id">{{accounttype.name}}</mat-option>
+
+        </mat-select>
+        <mat-error *ngIf="!type.pristine && type.errors?.required ">Valid Account Type Required</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name"
+               [(ngModel)]="account.name"
+               name="name"
+               #name="ngModel"
+               required>
+        <mat-error *ngIf="!name.pristine && name.errors?.required">Value is required</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-checkbox [(ngModel)]="account.isSubAccount" name="issubaccounrt" #issubaccount="ngModel" style="margin-left:18px; vertical-align:top; position:relative;" [checked]="account.isSubAccount">
+        Subaccount of
+      </mat-checkbox>
+      <br />
+      <mat-form-field *ngIf="account.isSubAccount" class="col-md-7" appearance="outline">
+        <mat-label>Account</mat-label>
+        <mat-select [(ngModel)]="account.accountTypeId" name="type" #type="ngModel" required>
+          <mat-option *ngFor="let account of subAccounts" [value]="account.id">{{account.name}}  | <i>{{account.accountType}}</i>   </mat-option>
+
+        </mat-select>
+
+      </mat-form-field>
+
+      <br />
+
+
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Description</mat-label>
+        <input type="text" matInput placeholder="Description" [(ngModel)]="account.description" name="description" #description="ngModel">
+      </mat-form-field>
+      <br />
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Account No. </mat-label>
+        <input type="text" matInput placeholder="Account No." [(ngModel)]="account.accountNo" name="accountNo" #accountNo="ngModel">
+      </mat-form-field>
+      <br />
+    </div>
+    </div>
+
+  <hr />
+  <div>
+    <button style="margin-right:10px" type="button" class="btn btn-primary" [disabled]="saving" (click)="save(modifyAccountForm)">Save</button>
+    <button type="button" (click)="cancel()" class="btn btn-warning" [disabled]="saving" trns>Cancel</button>
+    <!--<button type="button" (click)="deleteAccount()" class="btn btn-danger" [disabled]="saving">Delete Account</button>-->
+  </div>
+
+
+</form>
+
+
+

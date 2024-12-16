@@ -1,0 +1,87 @@
+<div [innerHTML]="getStyles()"></div>
+
+
+<div  class="header">
+  <div class="d-flex flex-row">
+
+    <div style="margin-right:10px" class="logo">
+      <a style="margin-left:12px" routerLink="/home">
+        <img src="./assets/img/money.png" alt="Book Keeper" title="Book Keeper" style="max-width:100px" class="logo" />
+      </a>
+    </div>
+
+    <!--<div class="menuitem">
+
+    <button mat-button color="accent" [routerLink]="'/chartOfAccounts'"  >
+      Chart Of Accounts
+    </button>
+  </div>-->
+
+    <div class="menuitem">
+      <button [matMenuTriggerFor]="list" mat-button>
+        <i class="fa fa-bars mr-2" aria-hidden="true"></i> <span *ngIf="!isMobile">List</span>
+      </button>
+      <mat-menu #list="matMenu">
+        <button mat-menu-item [routerLink]="'/chartOfAccounts'">  Chart Of Accounts</button>
+
+      </mat-menu>
+    </div>
+
+
+
+    <!--always last menu put new ones above-->
+    <div class="menuitem mr-auto">
+      <button [matMenuTriggerFor]="banking" mat-button>
+        <i class="fa fa-bars mr-2" aria-hidden="true"></i> <span *ngIf="!isMobile">Banking</span>
+      </button>
+      <mat-menu #banking="matMenu">
+        <button mat-menu-item (click)="getBank('register')">Use Register</button>
+        <button mat-menu-item (click)="getBank('reconcile')">Reconcile</button>
+        <button mat-menu-item (click)="importTransActions()">Import Transactions</button>
+      </mat-menu>
+
+    </div>
+
+
+
+
+
+    <!--Menu button Right>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <div style="color:white;margin-right:20px;margin-top:26px">{{user?.userName.toUpperCase()}}</div>
+    <div style="margin-right:10px"  class="menuitem">
+      <button [matMenuTriggerFor]="menu" mat-button>
+        <i class="fa fa-bars mr-2" aria-hidden="true"></i> <span *ngIf="!isMobile">Menu</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container *ngIf="isAdmin">
+          <!--<button mat-menu-item [routerLink]="'/admin'">
+        <i class="fa fa-search"></i> Admin Home
+      </button>-->
+          <button mat-menu-item [routerLink]="'/admin/adminUsersList'">
+            <i class="fa fa-search"></i> Admin Users
+          </button>
+
+          <mat-divider></mat-divider>
+        </ng-container>
+
+        <mat-divider *ngIf="isAdviser || isAdmin"></mat-divider>
+        <button mat-menu-item [routerLink]="'/profile'">
+          <i class="fa fa-id-card"></i>Profile
+        </button>
+
+        <button mat-menu-item (click)="logout()">
+          <i class="fa fa-fw fa-sign-out"></i> Log Out
+        </button>
+      </mat-menu>
+
+    </div>
+
+
+
+
+
+
+  
+    <!--End Menubutton Right-----------------------------  -->
+  </div>
+  </div>

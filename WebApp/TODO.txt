@@ -1,0 +1,1 @@
+﻿1.Before going to production need to import from printshop and then get the highest order id. Set that as the starting seed for invno in OPYOrder table.

@@ -1,0 +1,96 @@
+<form role="form" class="form-horizontal" name="adminUserForm" #adminUserForm="ngForm" novalidate>
+
+  <div *ngIf="hasLoaded">
+    <div class="row" *ngIf="currentUser">
+      <div class="col-md-4">
+        <h3>Admin User Details</h3>
+        <hr />
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name"
+                 [(ngModel)]="currentUser.firstName"
+                 name="firstName"
+                 #firstName="ngModel"
+                 required>
+          <mat-error *ngIf="!firstName.pristine && firstName.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name"
+                 [(ngModel)]="currentUser.lastName"
+                 name="lastName"
+                 #lastName="ngModel"
+                 required>
+          <mat-error *ngIf="!lastName.pristine && lastName.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address </mat-label>
+          <input type="email" matInput placeholder="Email Address" [(ngModel)]="currentUser.emailAddress" name="emailaddress" #emailaddress="ngModel" required email>
+          <mat-error *ngIf="!emailaddress.pristine && (emailaddress.errors?.required ||emailaddress.errors?.email)">Valid Email Address Required</mat-error>
+
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>User Name </mat-label>
+          <input type="email" matInput placeholder="User Name" [(ngModel)]="currentUser.userName" name="userName" #userName="ngModel" required>
+          <mat-error *ngIf="!userName.pristine && userName.errors?.required">Valid User Name Required</mat-error>
+
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select [(ngModel)]="currentUser.roleId" name="role">
+            <mat-option value="7d0c1aa1-44a5-48c3-8690-e4c1724f8db4">Administrator</mat-option>
+            <mat-option value="FB433B41-E93D-442A-9647-476D333A1965">Adviser</mat-option>
+
+
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field *ngIf="currentUser.roleId=='FB433B41-E93D-442A-9647-476D333A1965'" appearance="outline">
+          <mat-label>School Code</mat-label>
+          <input [disabled]="addModify=='modify'" matInput placeholder="School code"
+                 [(ngModel)]="currentUser.schcode"
+                 name="schcode"
+                 #schcode="ngModel"
+                 required>
+          <mat-error *ngIf="!schcode.pristine && schcode.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field *ngIf="currentUser.roleId !='FB433B41-E93D-442A-9647-476D333A1965'" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="New Password"
+                 [(ngModel)]="newPassword"
+                 name="newPassword1"
+                 #newPassword1="ngModel">
+
+          <mat-error *ngIf="!newPassword1.pristine && newPassword1.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="currentUser.roleId=='FB433B41-E93D-442A-9647-476D333A1965'" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Adviser Password"
+                 [(ngModel)]="currentUser.password"
+                 name="password"
+                 #password="ngModel">
+          <mat-error *ngIf="!password.pristine && password.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+
+
+        <br />
+      </div>
+
+
+    </div>
+  </div>
+  <hr />
+  <div>
+    <button style="margin-right:10px" type="button" class="btn btn-primary" [disabled]="saving" (click)="save(adminUserForm)" >SAVE</button>
+    <button type="button" (click)=" showListEvent.emit(true)" class="btn btn-warning" [disabled]="saving" trns>CANCEL</button>
+    <button type="button" (click)="deleteUser()" class="btn btn-danger" [disabled]="saving" trns>DELETE USER</button>
+  </div>
+
+
+</form>

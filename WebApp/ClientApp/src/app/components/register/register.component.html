@@ -1,0 +1,9 @@
+<h1 style="text-align:center">{{accountName}}</h1>
+
+  <ngx-spinner color="#1A237E"  bdColor="rgba(255,255,255 ,0.1)"  size="default"   [fullScreen]="true"><p style="color:black"> Loading... </p></ngx-spinner>
+
+
+<app-register-table *ngIf="showForm=='table'" (showEdit)="showEdit($event)" [data]="data"></app-register-table>
+<app-register-Modify *ngIf="showForm=='edit'" [transType]="transType" [rowData]="rowData" (setForm)="setForm($event)" (refresh)="getAccountTransActions()"></app-register-Modify>
+
+

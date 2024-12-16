@@ -1,0 +1,93 @@
+<ngx-spinner bdColor="rgba(255,255,255,0.1)" color="#081F3F" size="default" type="ball-spin-clockwise" [fullScreen]="true"><p style="color:black"> Loading... </p></ngx-spinner>
+<form *ngIf="loaded" role="form" class="form-horizontal" name="beginReconForm" #beginReconForm="ngForm" novalidate>
+  <ngx-spinner bdColor="primary" color="#081F3F" size="default" type="ball-spin-clockwise" [fullScreen]="true"><p style="color:black"> Loading... </p></ngx-spinner>
+  <mat-form-field class="col-md-3" style="font-size: x-small" appearance="outline">
+    <mat-label>Account</mat-label>
+    <mat-select required name="account" #account="ngModel" [(ngModel)]="reconcileInformation.accountId">
+      <mat-optgroup *ngFor="let type of accountList" [label]="type.accountType" [disabled]="type.disabled">
+        <mat-option *ngFor="let row of type.accounts" [value]="row.id">
+          {{row.name}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-error *ngIf="account.errors?.required">Account is required </mat-error>
+  </mat-form-field>
+  <span style="font-size:small">Last reconciled {{reconcileInformation.previousStatementDate|date:'MM/dd/yyyy'}}</span>
+  <br />
+  <mat-form-field class="col-md-3" style="margin-right:10px;font-size:x-small" appearance="outline">
+    <mat-label>Statement Date</mat-label>
+    <input required name="date" id="date" #date="ngModel" matInput [(ngModel)]="reconcileInformation.statementDate" [matDatepicker]="picker">
+    <mat-datepicker-toggle class="dpicker" matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="!date.pristine && date.errors?.required">Date is required</mat-error>
+  </mat-form-field>
+  <br />
+  <mat-form-field class="col-md-3" style="margin-right: 10px; font-size: x-small" appearance="outline">
+    <mat-label>Beginning Balance</mat-label>
+    <input [disabled]="true" matInput placeholder="Beginning Balance" required name="begginingBalance" [ngModel]="reconcileInformation.reconciledBalance|currency" #beginningBalance="ngModel">
+
+  </mat-form-field>
+
+  <mat-form-field class="col-md-3" style="margin-right: 10px; font-size: x-small" appearance="outline">
+    <mat-label>Ending Balance</mat-label>
+    <input digitOnly:decimal="true" matInput placeholder="Ending Balance" required name="endingBalance" [ngModel]="reconcileInformation.endingBalance|currency" [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="reconcileInformation.endingBalance=currencyInputChanged($event)" #endingBalance="ngModel">
+    <mat-error *ngIf="!endingBalance.pristine && endingBalance.errors?.required">Ending balance is required</mat-error>
+  </mat-form-field>
+  <br />
+  <mat-form-field class="col-md-3" style="margin-right: 10px; font-size: x-small" appearance="outline">
+    <mat-label>Service Charge</mat-label>
+    <input matInput required placeholder="Service Charge" name="serviceCharge" [(ngModel)]="reconcileInformation.seviceCharge" #serviceCharge="ngModel">
+    <mat-error *ngIf="!serviceCharge.pristine && serviceCharge.errors?.required">Ending balance is required</mat-error>
+  </mat-form-field>
+  <mat-form-field *ngIf="reconcileInformation.seviceCharge>0" class="col-md-3" style="margin-right:10px;font-size:x-small" appearance="outline">
+    <mat-label>Date</mat-label>
+    <input required name="scdate" id="scdate" #scdate="ngModel" matInput [(ngModel)]="reconcileInformation.serviceChargeDate" [matDatepicker]="picker1">
+    <mat-datepicker-toggle class="dpicker" matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+    <mat-error *ngIf="!scdate.pristine && scdate.errors?.required">Date is required</mat-error>
+  </mat-form-field>
+  <mat-form-field *ngIf="reconcileInformation.seviceCharge>0" class="col-md-3" style="font-size: x-small" appearance="outline">
+    <mat-label>Account</mat-label>
+    <mat-select required emptyAccount name="scaccount" #scaccount="ngModel" [(ngModel)]="reconcileInformation.serviceChargeAccount">
+      <mat-optgroup *ngFor="let type of accountList" [label]="type.accountType" [disabled]="type.disabled">
+        <mat-option *ngFor="let row of type.accounts" [value]="row.id">
+          {{row.name}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-error *ngIf="!scaccount.pristine && scaccount.errors?.emptyAccount">Valid account is required</mat-error>
+    <mat-error *ngIf="!scaccount.pristine && (scaccount.errors?.required)">Account is required </mat-error>
+  </mat-form-field>
+
+  <br />
+  <mat-form-field class="col-md-3" style="margin-right: 10px; font-size: x-small" appearance="outline">
+    <mat-label>Interest Earned</mat-label>
+    <input required matInput placeholder="Interest" name="interest" [(ngModel)]="reconcileInformation.interestCharge" #interest="ngModel">
+    <mat-error *ngIf="!interest.pristine &&interest.errors?.required">Ending balance is required</mat-error>
+  </mat-form-field>
+  <mat-form-field *ngIf="reconcileInformation.interestCharge>0" class="col-md-3" style="margin-right:10px;font-size:x-small" appearance="outline">
+    <mat-label>Date</mat-label>
+    <input required name="idate" id="idate" #idate="ngModel" matInput [(ngModel)]="reconcileInformation.interestDate" [matDatepicker]="picker2">
+    <mat-datepicker-toggle class="dpicker" matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+    <mat-error *ngIf="!idate.pristine && idate.errors?.required">Date is required</mat-error>
+  </mat-form-field>
+  <mat-form-field *ngIf="reconcileInformation.interestCharge>0" class="col-md-3" style="font-size: x-small" appearance="outline">
+    <mat-label>Account</mat-label>
+    <mat-select required emptyAccount name="iaccount" #iaccount="ngModel" [(ngModel)]="reconcileInformation.intererestAccount">
+      <mat-optgroup *ngFor="let type of accountList" [label]="type.accountType" [disabled]="type.disabled">
+        <mat-option *ngFor="let row of type.accounts" [value]="row.id">
+          {{row.name}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-error *ngIf="!iaccount.pristine && iaccount.errors?.emptyAccount">Valid account is required</mat-error>
+  </mat-form-field>
+  <hr />
+  <div style="text-align:center">
+    <button mat-button (click)="insertUpdateReconciliation(beginReconForm)" mat-raised-button color="primary">Continue</button>
+    <button mat-button [mat-dialog-close]="true" (click)="cancel()" mat-raised-button color="accent">Cancel</button>
+  </div>
+</form>
+
+

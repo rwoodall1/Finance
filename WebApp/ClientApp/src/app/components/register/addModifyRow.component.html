@@ -1,0 +1,126 @@
+
+<form role="form" class="form-horizontal" name="modifyRowForm" #modifyRowForm="ngForm" novalidate>
+  <ngx-spinner bdColor="primary" color="#081F3F" size="default" type="ball-spin-clockwise" [fullScreen]="true"><p style="color:black"> Loading... </p></ngx-spinner>
+  <div style="background-color:ghostwhite">
+    <h2 style="text-align:center">Check</h2>
+
+    <mat-form-field class="col-md-2" style="margin-right:10px;font-size:x-small" appearance="outline">
+      <mat-label>Date</mat-label>
+      <input required name="date" id="date" #date="ngModel" matInput [(ngModel)]="rowData.transDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle class="dpicker" matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="date.errors?.required">Date is required</mat-error>
+    </mat-form-field>
+ 
+    <mat-form-field class="col-md-1 " style="margin-right: 10px; font-size: x-small" appearance="outline">
+      <mat-label>Number</mat-label>
+      <input matInput placeholder="Ref No."  name="refNumber" [(ngModel)]="rowData.refNumber" #refNumber="ngModel">
+      
+     </mat-form-field>
+
+    <mat-form-field style="font-size: x-small" appearance="outline" class="col-md-3">
+      <mat-label>Payee</mat-label>
+      <mat-select name="payee" #payee="ngModel" [(ngModel)]="rowData.payeeId">
+        <mat-optgroup *ngFor="let name of nameList" [label]="name.nameType" [disabled]="name.disabled">
+
+          <mat-option *ngFor="let row of name.names" [value]="row.id">
+            {{row.fullName}}
+          </mat-option>
+
+        </mat-optgroup>
+
+      </mat-select>
+
+    </mat-form-field>
+    <mat-form-field style="font-size: x-small" appearance="outline" class="col-md-3">
+      <mat-label>Account</mat-label>
+      <mat-select required name="account" #account="ngModel" [(ngModel)]="rowData.accountId">
+        <mat-optgroup *ngFor="let type of accountList" [label]="type.accountType" [disabled]="type.disabled">
+          <mat-option *ngFor="let row of type.accounts" [value]="row.id">
+            {{row.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>    
+      <mat-error *ngIf="account.errors?.required">Account is required </mat-error>   
+    </mat-form-field>
+    <mat-form-field *ngIf="rowData.debit !=null" class="col-md-1 " style="margin-right: 10px; font-size: x-small" appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput isZero digitOnly:decimal="true" placeholder="Amount" required name="amount1" [ngModel]="rowData.debit|currency" #amount1="ngModel" [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="rowData.debit=currencyInputChanged($event)">
+      <mat-error *ngIf="!amount1.pristine && amount1.errors?.required">Value is required</mat-error>
+      <mat-error *ngIf="!amount1.pristine && amount1.errors?.isZero">Valid amount is required</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field *ngIf="rowData.credit !=null" class="col-md-1 " style="margin-right: 10px; font-size: x-small" appearance="outline">
+      <mat-label>Amount</mat-label>
+
+      <input matInput isZero digitOnly:decimal="true" required placeholder="Amount" name="amount2" #amount2="ngModel" [ngModel]="rowData.credit|currency" [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="rowData.credit=currencyInputChanged($event)">
+      <mat-error *ngIf="!amount2.pristine && (amount2.value==0 ||amount2.errors?.required)">Value is required</mat-error>
+      <mat-error *ngIf="!amount2.pristine && amount2.errors?.isZero">Valid amount is required</mat-error>
+    </mat-form-field>
+     
+      <br />
+      <mat-form-field class="col-md-6 " style="margin-right: 10px; font-size: x-small" appearance="outline">
+        <mat-label>Memo</mat-label>
+        <textarea rows="3" matInput placeholder="memo" name="memo" [ngModel]="rowData.memo" #memo="ngModel"></textarea>
+
+      </mat-form-field>
+
+      <button (click)="save(modifyRowForm)" mat-raised-button color="primary">Save</button>
+      <button (click)="showTable()" mat-raised-button color="accent">Cancel</button>
+
+      <button *ngIf="transType !='add'" (click)="deleteTransaction()" mat-raised-button color="warn">Delete Transaction</button>
+
+
+</div>
+  <div>Child Transactions</div>
+  <table >
+    <tr>
+      <th class="chkheader"> <a [routerLink]="[]" (click)="addChildTransAction()" style="color: white; float: left; font-size: x-small"> <mat-icon style="font-size:medium;float: left; margin-left: 2px">add_circle</mat-icon>Add Line</a> Account</th>
+      <th class="chkheader">Amount</th>
+      <th class="chkheader">Memo</th>
+    </tr>
+    <tr *ngFor="let childRow of childData;index as i">
+      <td style="width:25%" class="col">
+
+        <a [routerLink]="[]" (click)="removeChildTransAction(i)"> <mat-icon style="font-size:large;color:black">delete_forever</mat-icon></a>
+     
+        <select class="childSelect" name="childAccount{{i}}" #childAccount{{i}}="ngModel" [(ngModel)]="childRow.accountId" required>
+          <optgroup *ngFor="let type of accountList" [label]="type.accountType" [disabled]="type.disabled">
+            <option *ngFor="let row of type.accounts" [value]="row.id">{{row.name}}</option>
+          </optgroup>
+
+        </select>
+        <span *ngIf="checkAccountId(i,modifyRowForm)" class="alert"> Account is required</span>
+
+      </td>
+
+      <td style="width:15%" class="col">
+
+        <mat-form-field *ngIf="childRow.credit!=null" style="font-size: x-small;margin-top:16px" appearance="outline">
+
+          <input required isZero matInput digitOnly:decimal="true" placeholder="amount" name="childAmount{{i}}" #childAmount="ngModel" [ngModel]="childRow.credit|currency" [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="childRow.credit=currencyInputChanged($event)">
+         
+          <mat-error *ngIf="checkChildAmount(modifyRowForm,i)">Valid amount is required</mat-error>
+         
+        </mat-form-field>
+
+        <mat-form-field *ngIf="childRow.debit!=null" style="font-size: x-small;margin-top:16px" appearance="outline">
+          <input required isZero matInput digitOnly:decimal="true" placeholder="amount" name="childAmount{{i}}" #childAmount="ngModel" [ngModel]="childRow.debit|currency" [ngModelOptions]="{updateOn:'blur'}" (ngModelChange)="childRow.debit=currencyInputChanged($event)">
+          <mat-error *ngIf="checkChildAmount(modifyRowForm,i)">Valid amount is required</mat-error>
+          
+        </mat-form-field>
+      </td>
+
+
+      <td class="col">
+
+        <mat-form-field style="width: 100%; font-size: x-small; margin-top: 16px" appearance="outline">
+
+          <textarea matInput placeholder="note" name="memo{{i}}" [(ngModel)]="childRow.memo" #memo{{i}}="ngModel"></textarea>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+</form>
+

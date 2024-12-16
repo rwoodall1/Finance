@@ -1,0 +1,106 @@
+<form role="form" class="form-horizontal" name="profileForm" #profileForm="ngForm" novalidate>
+  <mat-spinner *ngIf="!hasLoaded" class="custom-spinner" color="primary" diameter="65"></mat-spinner>
+  <div *ngIf="hasLoaded">
+    <div class="row" *ngIf="user">
+      <div class="col-md-4">
+        <h3>User Details</h3>
+        <hr />
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name"
+                 [(ngModel)]="user.firstName"
+                 name="firstName"
+                 #firstName="ngModel"
+                 required>
+          <mat-error *ngIf="!firstName.pristine && firstName.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name"
+                 [(ngModel)]="user.lastName"
+                 name="lastName"
+                 #lastName="ngModel"
+                 required>
+          <mat-error *ngIf="!lastName.pristine && lastName.errors?.required">Value is required</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address </mat-label>
+          <input type="email" matInput placeholder="Email Address" [(ngModel)]="user.emailAddress" name="emailaddress" #emailaddress="ngModel" required email>
+          <mat-error *ngIf="!emailaddress.pristine && (emailaddress.errors?.required ||emailaddress.errors?.email)">Valid Email Address Required</mat-error>
+
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>User Name </mat-label>
+          <input matInput placeholder="User Name" [(ngModel)]="user.userName" name="username" #username="ngModel" required>
+          <mat-error *ngIf="!username.pristine && username.errors?.required ">Valid User Name Required</mat-error>
+
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Change Password </mat-label>
+          <input matInput placeholder="Change Password" [(ngModel)]="newPassword" name="password" #password="ngModel">
+
+          <mat-error *ngIf="!password.pristine && password.errors?.length">Password must be 5 characters or longer</mat-error>
+        </mat-form-field>
+        <br />
+        <i class="mat-form-field" style="font-size:x-small">If password is left blank it will not be updated, the rest of the information will be updated.</i>
+
+
+
+      </div>
+      <div class="col-md-4">
+        <h3>Shipping Information</h3>
+        <hr />
+        <mat-form-field appearance="outline">
+          <mat-label>Shipping First Name</mat-label>
+          <input matInput placeholder="Shipping First Name" [(ngModel)]="user.shipFirstName" name="shippingFirstName" #shippingFirstName="ngModel">
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Shipping Last Name</mat-label>
+          <input matInput placeholder="Shipping Last Name" [(ngModel)]="user.shipLastName" name="shippingLastName" #shippingLastName="ngModel">
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Shipping Street</mat-label>
+          <input matInput placeholder="Shipping Street" [(ngModel)]="user.shipStreet" name="shippingStreet" #shippingStreet="ngModel">
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Shipping City</mat-label>
+          <input matInput placeholder="Shipping City" [(ngModel)]="user.shipCity" name="shippingCity" #shippingCity="ngModel">
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <mat-select [(ngModel)]="user.shipState" (selectionChange)="setStateInformation($event,'ship')" name="shipState" #shipState="ngModel">
+            <!--<mat-option>None</mat-option>-->
+            <mat-option *ngFor="let state of shipStates" [value]="state.abrev">
+              {{state.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+          <mat-label>Shipping Zip Code</mat-label>
+          <input matInput placeholder="Shipping Zip Code" [(ngModel)]="user.shipZipCode" name="shippingZipCode" #shippingZipCode="ngModel">
+        </mat-form-field>
+        <br />
+      </div>
+
+    </div>
+
+    <hr />
+    <div>
+      <button style="margin-right:10px" type="button" class="btn btn-primary" [disabled]="saving" (click)="save(profileForm)">SAVE</button>
+      <button type="button" (click)="_location.back()" class="btn btn-warning" [disabled]="saving">CANCEL</button>
+      <button *ngIf="loggedInUser.isAdmin" type="button" (click)="deleteUser()" class="btn btn-danger" [disabled]="saving">DELETE USER</button>
+    </div>
+  </div>
+
+</form>
+

@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "ClientApp/src/styles.css",
+    "inputFile": "ClientApp/src/styles.scss"
+  },
+  {
+    "outputFile": "ClientApp/src/assets/sass/siteAngular.css",
+    "inputFile": "ClientApp/src/assets/sass/siteAngular.scss"
+  },
+  {
+    "outputFile": "ClientApp/src/theme.css",
+    "inputFile": "ClientApp/src/theme.scss"
+  }
+]

@@ -1,0 +1,19 @@
+<div class="page-wrap">
+  <router-outlet name="style"></router-outlet>
+  <router-outlet name="header"></router-outlet>
+
+  <br>
+
+  <div [ngClass]="{'container container-content panel panel-default':router.url.indexOf('/login') !== 0  }">
+    <router-outlet><router-outlet name="subheader"></router-outlet> </router-outlet>
+
+  </div>
+
+</div>
+<router-outlet name="footer"></router-outlet>
+
+
+
+
+
+

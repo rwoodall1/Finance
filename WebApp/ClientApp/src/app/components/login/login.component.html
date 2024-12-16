@@ -1,0 +1,48 @@
+<div [innerHTML]="getStyles()"></div>
+<div style="text-align:center;">
+  <img src="./assets/img/money.png" style="width:100%;max-width:300px">
+</div>
+<section *ngIf="showForm=='login'" id="login-section" class="row">
+  <h1 style="color:black;text-align:center;margin-bottom:30px"> Book Keeper Login</h1>
+  <div class="col-md-12">
+    <form class="login-form loginform" autocomplete="off" style="margin:0 auto; max-width:600px;width:100%" name="loginForm" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <fieldset>
+        
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input matInput id="userName" name="userName" placeholder="User Name" [(ngModel)]="loginData.userName" #userName="ngModel" required>
+              <mat-error *ngIf="userName.errors?.required && !userName.pristine ">
+               User Name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="'password'" id="password" name="password" [(ngModel)]="loginData.password" #password="ngModel" required>
+              <mat-error *ngIf="password.errors?.required && !password.pristine">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+
+      
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button class="w-100" [disabled]="showSpinner" mat-flat-button color="primary" type="submit">Log In</button>
+            <mat-spinner *ngIf="showSpinner" class="custom-spinner" color="#1A237E" diameter="40"></mat-spinner>
+            <button class="w-100 mt-1" mat-flat-button color="accent" type="button" (click)="showForm ='forgotPassword'">Forgot password?</button>
+            <br />    <br />
+            <!--?????<div style="text-align:center"> <a (click)="openDialog()" [routerLink]=[]><i class="fa fa-question-circle fa-2x" aria-hidden="true"></i> Help</a></div>-->
+          </div>
+        </div>
+        <br />
+      </fieldset>
+    </form>
+  </div>
+</section>
+
+<app-forgotpassword (showFormEvent)="setForm($event)" *ngIf="showForm=='forgotPassword'"> </app-forgotpassword>
+
+

@@ -1,0 +1,26 @@
+
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: white;
+
+  font-weight: 700;
+}
+
+
+  /* Styles for the active tab label */
+  .mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: white;
+    color:#007bff;
+    font-weight: 700;
+  }
+.mat-tab-label-container {
+  background-color: transparent !important;
+  border:none
+}
+.mat-form-field{
+    width:70%
+}
+

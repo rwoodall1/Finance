@@ -1,0 +1,38 @@
+
+.table {
+  border: solid 1px !important;
+  margin: auto;
+  margin-top: 25px;
+  width: 100%;
+}
+.chkheader {
+  background-color: gray;
+  height: 15px !important;
+  text-align: center;
+  border: solid 1px !important;
+  border-color:darkgrey !important;
+  
+}
+.col{
+    border:groove 3px;
+}
+.childSelect {
+  width:100%;
+  height:35px;
+  border-radius:5px;
+  border-color:lightgray;
+  margin-bottom:14px;
+  font-size:x-small;
+}
+.alert {
+
+ padding-top:5px;
+  text-align: center;
+  font-size: small;
+  color: red;
+}
+::ng-deep.mat-datepicker-toggle-default-icon {
+  margin: auto;
+  color: black;
+}
+

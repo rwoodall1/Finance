@@ -1,0 +1,15 @@
+<ngx-spinner bdColor="rgba(255,255,255,0.1)" color="#081F3F" size="default" type="ball-spin-clockwise" [fullScreen]="true"><p style="color:black"> Loading... </p></ngx-spinner>
+<div style="height:500px;">
+  <mat-list>
+    <div mat-subheader>Bank Accounts</div>
+    <mat-list-item *ngFor="let account of bankAccounts">
+      <mat-icon>account_balance</mat-icon>
+      <div matListItemTitle><a [routerLink]="[]" (click)="openForm(account.id)">{{account.name}}</a></div>
+
+    </mat-list-item>
+
+  </mat-list>
+</div>
+
+
+

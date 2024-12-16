@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <base href="/">
+  <script>
+    (function () {
+      var portString = window.location.port;
+      if (portString.length > 0) { portString = ":" + portString; }
+      var baseLocation = window.location.protocol + '//' + window.location.hostname + portString;
+      if (document.getElementsByTagName('base')[0].href.replace(baseLocation, '') == '/src/') {
+        window['_app_base'] = '/';
+      } else {
+        window['_app_base'] = document.getElementsByTagName('base')[0].href.replace(baseLocation, '');
+      }
+
+    })();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <title>Book Keeper</title>
+  <meta name="Publisher" content="Memorybook">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+  <script type="text/javascript" href="./assets/js/popper.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+   
+  <link rel="stylesheet" type="text/css" href="./assets/css/ball-spin-clockwise.css"
+  <link rel="stylesheet" type="text/css" href="./assets/css/toastr.css">
+  <link rel="stylesheet" type="text/css" href="./assets/sass/siteAngular.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/primeng@5.2.3/resources/primeng.min.css" />
+  <link rel="stylesheet" type="text/css" href="./assets/css/primeicons/primeicons.css" />
+
+
+  <link href="https://unpkg.com/@blueprintjs/popover2@1/lib/css/blueprint-popover2.css" rel="stylesheet" />
+  <script>
+    var AppVersion = 'v1.100000000000/';
+
+  </script>
+
+</head>
+<body class="html-body" >
+  <app-root>
+    <div style="font-size:x-large;text-align:center">
+      <style>
+        html, body {
+          background-color: #e6eaed
+        }
+
+        #map {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+        }
+      </style>
+      <br /><br />
+      <img src="./assets/img/money.png" style="width:100%;max-width:300px">
+      <h1 style="color:black;text-align:center;margin-bottom:30px"> Book Keeper</h1>
+      <br />
+      <br /><br />
+      <img src="./assets/img/spiffygif_30x30.gif" style="width:100%;max-width:60px">
+    </div>
+  </app-root>
+</body>
+</html>

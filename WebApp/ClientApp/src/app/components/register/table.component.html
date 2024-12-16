@@ -1,0 +1,121 @@
+
+<div style="font-size:x-small">
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Add Transaction</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="addTransaction()">
+      <mat-option ></mat-option>
+      <mat-option value="CHK">Check</mat-option>
+      <mat-option value="DEP">Deposite</mat-option>
+      <mat-option value="TRANSF">Transfer</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="margin-left:5px" appearance="outline">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+</div>
+<div class="scroll-container">
+  <table mat-table [dataSource]="dataSourceWithPageSize" multiTemplateDataRows>
+    <ng-container matColumnDef="date">
+
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.transDate|date:'MM/dd/YYYY'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef> Number </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.refNumber}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="payee">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Payee </th>
+      <td mat-cell *matCellDef="let element" [attr.colspan]="2"> {{element.payeeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="debit">
+      <th mat-header-cell *matHeaderCellDef> Payment </th>
+      <td mat-cell *matCellDef="let element"> {{element.debit|currency:'USD'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="clr">
+      <th mat-header-cell *matHeaderCellDef> Clr </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [disabled]="true" [(ngModel)]="element.clr"></mat-checkbox>
+
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="credit">
+      <th mat-header-cell *matHeaderCellDef> Deposit </th>
+      <td mat-cell *matCellDef="let element"> {{element.credit|currency:'USD'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="balance">
+      <th mat-header-cell *matHeaderCellDef> Balance </th>
+      <td mat-cell *matCellDef="let element">{{element.balance|currency:'USD'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedBlank">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+      </td>
+
+    </ng-container>
+    <ng-container matColumnDef="expandedType">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+
+        {{element.transType}}
+
+      </td>
+
+    </ng-container>
+    <ng-container matColumnDef="expandedAccount">
+
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+
+
+        {{element.childAccountName}}
+
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedMemo">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+
+        {{element.memo}}
+
+      </td>
+
+    </ng-container>
+    <ng-container matColumnDef="expandedBlankpayment">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedBlankclr">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedBlankdeposit">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="expandedBlankbalance">
+      <td style="background-color:{{registerClr}}" mat-cell *matCellDef="let element">
+      </td>
+    </ng-container>
+    <tr mat-header-row class="tablerow" *matHeaderRowDef="columnsToDisplay;sticky:true"></tr>
+    <!--contextmenu-->
+    <tr mat-row (dblclick)=" edit($event,element)" *matRowDef="let element; columns: columnsToDisplay;"
+        class="example-element-row tablerow">
+    </tr>
+    <tr mat-row (dblclick)=" edit($event,row)" *matRowDef="let row; columns:['expandedBlank','expandedType','expandedAccount','expandedMemo','expandedBlankpayment','expandedBlankclr','expandedBlankdeposit','expandedBlankbalance'] "
+        class="example-element-row tablerow">
+    </tr>
+
+  </table>
+</div>
+
+<mat-paginator  #paginatorPageSize
+               [pageSizeOptions]="pageSizes"
+               showFirstLastButtons>
+</mat-paginator>
+
