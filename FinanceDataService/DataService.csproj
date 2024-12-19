@@ -25,7 +25,7 @@
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
-
+	
   <ItemGroup>
 	  <Reference Include="DataService">
 		  <HintPath>bin\Debug\net9.0\DataService.dll</HintPath>

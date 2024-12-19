@@ -87,8 +87,14 @@
 
     <ProjectReference Include="..\BindingModels\BindingModels.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
-	  <ProjectReference Include="..\FinanceDataService\DataService.csproj" />
+    <ProjectReference Include="..\FinanceDataService\DataService.csproj" />
 	  <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DataService">
+      <HintPath>..\FinanceDataService\bin\Debug\net9.0\DataService.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
