@@ -18,10 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.16.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="NLog.Database" Version="5.2.8" />
     <PackageReference Include="Select.HtmlToPdf.NetCore" Version="21.1.0" />
@@ -30,11 +28,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BindingModels\BindingModels.csproj" />
-    <ProjectReference Include="..\..\..\Core\Core.csproj" />
-    <ProjectReference Include="..\..\..\FinanceDataService\DataService.csproj" />
-    <ProjectReference Include="..\..\..\FinanceSqlClient\SqlClient\SqlClient.csproj" />
-    <ProjectReference Include="..\..\..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+	  <ProjectReference Include="..\BindingModels\BindingModels.csproj" />
+	  <ProjectReference Include="..\FinanceSqlClient\SqlClient\SqlClient.csproj" />
+	
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BindingModels">
+      <HintPath>..\BindingModels\bin\Debug\net9.0\BindingModels.dll</HintPath>
+    </Reference>
+    <Reference Include="Core">
+      <HintPath>..\Core\bin\Debug\net9.0\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DataService">
+      <HintPath>..\FinanceDataService\bin\Debug\net9.0\DataService.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlClient">
+      <HintPath>..\FinanceSqlClient\SqlClient\bin\Debug\net9.0\SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities">
+      <HintPath>..\Utilities\bin\Debug\net9.0\Utilities.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
