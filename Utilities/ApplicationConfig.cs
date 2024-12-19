@@ -21,7 +21,7 @@ namespace Utilities
     
         public static string Environment { get; set; }
         public static string ErrorEmailAddress { get; set; }
-        public static string IsDeveloperMachine { get; set; }
+        public static bool IsDeveloperMachine { get; set; }
         public static SMTPConfig SMTPConfig { get; set; }
         public static string SqlPassPhrase { get; set; }
         public static string APISecretKey { get; set; }
