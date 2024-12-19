@@ -89,7 +89,6 @@
     <ProjectReference Include="..\..\..\BindingModels\BindingModels.csproj" />
     <ProjectReference Include="..\..\..\Core\Core.csproj" />
     <ProjectReference Include="..\..\..\FinanceDataService\DataService.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
