@@ -15,3 +15,5 @@
 /Core/bin
 /FinanceDataService/bin
 /FinanceDataService/obj
+/FinanceSqlClient/SqlClient/bin
+/FinanceSqlClient/SqlClient/obj
