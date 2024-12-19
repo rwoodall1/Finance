@@ -9,7 +9,8 @@ import { EmitterService } from './services/emitter.service';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.css'],
     standalone: false
 })
 export class AppComponent {

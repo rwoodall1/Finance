@@ -4,13 +4,16 @@
 
   <br>
 
-  <div [ngClass]="{'container container-content panel panel-default':router.url.indexOf('/login') !== 0  }">
-    <router-outlet><router-outlet name="subheader"></router-outlet> </router-outlet>
+  <div [ngClass]="{'container container-content  panel panel-default':router.url.indexOf('/login') !== 0  }">
+    <div >
+      <router-outlet><router-outlet name="subheader"></router-outlet> </router-outlet>
+    </div>
 
+    
   </div>
-
+  <router-outlet class="footer" name="footer"></router-outlet>
 </div>
-<router-outlet name="footer"></router-outlet>
+
 
 
 
