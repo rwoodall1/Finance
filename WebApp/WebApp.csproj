@@ -23,13 +23,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.16.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.26" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.6" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="Microsoft.Owin.Security" Version="4.2.2" />
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="NLog.Database" Version="5.2.8" />
@@ -45,12 +44,11 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="ClientApp\src\app\components\polotno-js\**" />
+   
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="ClientApp\src\app\components\polotno-js\**" />
-    <EmbeddedResource Remove="ClientApp\src\app\components\polotno-js\**" />
+
     <None Remove="$(SpaRoot)**" />
-    <None Remove="ClientApp\src\app\components\polotno-js\**" />
+  
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -86,9 +84,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BindingModels\BindingModels.csproj" />
-    <ProjectReference Include="..\..\..\Core\Core.csproj" />
-    <ProjectReference Include="..\..\..\FinanceDataService\DataService.csproj" />
+
+    <ProjectReference Include="..\BindingModels\BindingModels.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+	  <ProjectReference Include="..\FinanceDataService\DataService.csproj" />
+	  <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

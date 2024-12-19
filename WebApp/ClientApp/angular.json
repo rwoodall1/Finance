@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "moment"
+            ],
             "progress": false,
             "outputPath": "dist",
             "index": "src/index.html",
@@ -41,9 +44,9 @@
                 "node_modules/",
                 "src/assets/styles"
               ]
-             },
-            "scripts": ["./node_modules/jquery/dist/jquery.min.js"]
             },
+            "scripts": [ "./node_modules/jquery/dist/jquery.min.js" ]
+          },
           "configurations": {
             "production": {
               "budgets": [

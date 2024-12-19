@@ -22,7 +22,7 @@ $my-app-theme: mat.m2-define-light-theme((color: ( primary: $my-app-primary, acc
 @include mat.all-component-themes($my-app-theme);
 
 body{
-    color:white;
+    color:black;
 }
 
 

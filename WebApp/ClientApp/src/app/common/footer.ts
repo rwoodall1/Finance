@@ -17,6 +17,7 @@ export class FooterComponent implements OnInit {
       
   }
   get currentYear() {
+    
     return new Date().getFullYear();
   }
 }
