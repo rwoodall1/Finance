@@ -35,7 +35,7 @@
 
 
 
-    <div class="col-md-5" style="clear: both;">
+    <div *ngIf="dataSource1?.filteredData?.length>0" class="col-md-5" style="clear: both;">
       <mat-form-field  style="font-size: x-small;float:right" appearance="outline">
         <mat-label>Actions</mat-label>
         <mat-select (selectionChange)="importTransAction()" name="cmbaction" [(value)]="selectedAction">

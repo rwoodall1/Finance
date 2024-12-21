@@ -79,6 +79,11 @@ export class BankFeedComponent implements OnInit {
     this.setDataSource();
   }
   setDataSource() {
+    if (!this.currentBankId || this.currentBankId.length < 4) {
+      this.Notification.displayError("Account Number is missing,can not load data")
+      return;
+    }
+
     this.spinner.show();
     this.bankFeedService.getImportedData(this.currentBankId).subscribe(response => {
       const dataresponse: ApiProcessingResult<Array<BankFeedModel>> = response.apiProcessingResult;
@@ -101,8 +106,16 @@ export class BankFeedComponent implements OnInit {
       this.selectedAction = ""
       //Import Data
       this.bankFeedService.importData(this.dataSource1.filteredData).subscribe(response => {
-
-
+        var dataresponse = response.apiProcessingResult;
+        if (dataresponse.isError) {
+     
+          this.Notification.displayError(dataresponse.errors[0].errorMessage);
+          this.spinner.hide
+          return;
+        }
+         this.setDataSource();
+        this.Notification.displaySuccess("Data has been imported")
+      
       })
     } else if (this.selectedAction == 'Ignore') {
       this.selectedAction = ""

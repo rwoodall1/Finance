@@ -61,6 +61,13 @@ namespace WebApp.Controllers
         public async Task<ActionResult> GetImportedData(string bankId)
         {
             var processingResult = new ApiProcessingResult<List<TransactionBankFeedModel>>();
+            if (string.IsNullOrEmpty(bankId)||bankId.Length<4)
+            {
+                processingResult.IsError = true;
+                processingResult.Errors.Add(new ApiProcessingError("Invalid account number","Invalid account number",""));
+                return Ok(processingResult);
+
+            }
             var result = await new TransActionDataService().GetImportedData(bankId);
             if (result.IsError)
             {
@@ -89,6 +96,8 @@ namespace WebApp.Controllers
         public async Task<ActionResult> ImportData(List<TransactionBankFeedModel> model)
         {
             var processingResult = new ApiProcessingResult();
+            
+
             foreach (TransactionBankFeedModel row in model)
             {
                 if (row.ChildAccountId == 0)
