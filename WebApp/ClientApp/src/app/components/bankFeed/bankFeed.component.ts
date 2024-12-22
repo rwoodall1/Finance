@@ -43,12 +43,12 @@ export class BankFeedComponent implements OnInit {
   
     this.getLkpData();
     this.getBanks();
-    //this.setDataSource()
+   
 
 
   }
   ngAfterViewInit() {
-    //this.dataSourceWithPageSize.paginator = this.paginatorPageSize;
+   
   }
   getLkpData() {
     this.accountService.sysAccounts().subscribe(response => {
@@ -90,6 +90,9 @@ export class BankFeedComponent implements OnInit {
       if (dataresponse.isError) {
         this.Notification.displayError(dataresponse.errors[0].errorMessage);
         this.spinner.hide();
+        this.data = new Array<BankFeedModel>();
+        this.dataSource1 = new MatTableDataSource<BankFeedModel>(this.data);
+        this.dataSource1.paginator = this.paginator;
         return;
       }
 
@@ -104,6 +107,7 @@ export class BankFeedComponent implements OnInit {
   importTransAction() {
     if (this.selectedAction == 'Add/Approved') {
       this.selectedAction = ""
+      this.spinner.show();
       //Import Data
       this.bankFeedService.importData(this.dataSource1.filteredData).subscribe(response => {
         var dataresponse = response.apiProcessingResult;
@@ -113,12 +117,28 @@ export class BankFeedComponent implements OnInit {
           this.spinner.hide
           return;
         }
-         this.setDataSource();
+        this.setDataSource();
+        this.spinner.hide
         this.Notification.displaySuccess("Data has been imported")
       
       })
     } else if (this.selectedAction == 'Ignore') {
       this.selectedAction = ""
+      this.spinner.show();
+      this.bankFeedService.setImported(this.dataSource1.filteredData).subscribe(response => {
+        var dataresponse = response.apiProcessingResult;
+        if (dataresponse.isError) {
+
+          this.Notification.displayError(dataresponse.errors[0].errorMessage);
+          this.spinner.hide
+          return;
+        }
+        this.setDataSource();
+        this.spinner.hide
+        this.Notification.displaySuccess("Data has been ignored")
+      })
+
+
       //Set Imported
     }
 
@@ -160,7 +180,7 @@ export class BankFeedComponent implements OnInit {
 
           return;
         }
-        this.data = dataresponse.data;
+        this.setDataSource();
        
       })
     }

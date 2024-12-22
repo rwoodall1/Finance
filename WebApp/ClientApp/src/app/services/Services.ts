@@ -156,6 +156,11 @@ export class BankFeedService extends BaseService {
     return this.post(this.baseUrl + 'importData', data);
 
   }
+  setImported(data: Array<BankFeedModel>) {
+    //this is if we want to ignore duplicate data
+    return this.post(this.baseUrl + 'setImported', data);
+
+  }
 }
 @Injectable()
 export class ValidationService extends BaseService {

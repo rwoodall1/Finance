@@ -103,8 +103,10 @@
             <mat-form-field style="font-size: x-small" appearance="outline">
               <mat-label>Payee</mat-label>
               <mat-select name="payee" #payee="ngModel" [(ngModel)]="element.payeeId">
-                <mat-optgroup *ngFor="let name of nameList" [label]="name.nameType" [disabled]="name.disabled">
-
+                <mat-optgroup *ngFor="let name of nameList" [disabled]="name.disabled">
+                  <div class="accountType">
+                    {{name.nameType}}
+                  </div>
                   <mat-option *ngFor="let row of name.names" [value]="row.id">
                     {{row.fullName}}
                   </mat-option>
@@ -127,7 +129,10 @@
             <mat-form-field style="font-size: x-small" appearance="outline">
               <mat-label>Account</mat-label>
               <mat-select required name="account" #account="ngModel" [(ngModel)]="element.childAccountId">
-                <mat-optgroup *ngFor="let type of accountList" [label]="type.accountType" [disabled]="type.disabled">
+                <mat-optgroup *ngFor="let type of accountList" [disabled]="type.disabled" >
+                  <div class="accountType">
+                    {{type.accountType}}
+                  </div>
                   <mat-option *ngFor="let row of type.accounts" [value]="row.id">
 
                     {{row.name}}

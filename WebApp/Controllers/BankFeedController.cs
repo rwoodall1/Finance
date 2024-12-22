@@ -77,6 +77,12 @@ namespace WebApp.Controllers
                 return Ok(new { ApiProcessingResult = processingResult });
             }
             var rawData=result.Data;
+            if (rawData==null)
+            {
+                processingResult.IsError = true;
+                processingResult.Errors.Add(new ApiProcessingError("There is no imported data available", "There is no imported data available",""));
+                return Ok(new { ApiProcessingResult = processingResult });
+            }
             var bankModelResult = await new BankFeedDataService().StmttrnToTransActionCrud(rawData);
             if (bankModelResult.IsError)
             {
@@ -169,6 +175,31 @@ namespace WebApp.Controllers
             return Ok(new { ApiProcessingResult = processingResult });
         }
 
+        [AuthorizeAttribute]
+        [HttpPost, Route("setImported")]
+        public async Task<ActionResult> SetImported(List<TransactionBankFeedModel> model)
+        {
+            var processingResult = new ApiProcessingResult();
+
+
+            foreach (TransactionBankFeedModel row in model)
+            {
+                if (row.Import) {
+                    var updateResult = await new BankFeedDataService().SetImported(row.FITID);
+                    if (updateResult.IsError)
+                    {
+                        processingResult.IsError = true;
+
+                        processingResult.Errors.Add(new ApiProcessingError("Error setting import as ignored. ", "Error setting import as ignored. ", ""));
+                        return Ok(new { ApiProcessingResult = processingResult });
+                    }
+                }
+
+            }
+
+
+            return Ok(new { ApiProcessingResult = processingResult });
+        }
     }
   
 }
