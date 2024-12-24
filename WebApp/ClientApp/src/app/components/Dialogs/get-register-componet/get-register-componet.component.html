@@ -3,8 +3,11 @@
   <mat-list>
     <div mat-subheader>Bank Accounts</div>
     <mat-list-item *ngFor="let account of bankAccounts">
-      <mat-icon>account_balance</mat-icon>
-      <div matListItemTitle><a [routerLink]="[]" (click)="openForm(account.id)">{{account.name}}</a></div>
+      
+      <div matListItemTitle><a [routerLink]="[]" (click)="openForm(account.id)">
+  <mat-icon>account_balance</mat-icon>
+  {{account.name}}
+</a></div>
 
     </mat-list-item>
 

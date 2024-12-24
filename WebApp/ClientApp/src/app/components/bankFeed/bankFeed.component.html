@@ -7,7 +7,7 @@
   <div class="row ">
     <div  class="col-md-2 ">
      
-      <mat-form-field style="font-size:x-small" appearance="outline">
+      <mat-form-field class="input-parent" style="font-size:x-small" appearance="outline">
         <mat-label>Select Bank</mat-label>
 
         <mat-select class="dense6"(selectionChange)="onChange()" [(ngModel)]="currentBankId" name="nbank">
@@ -36,7 +36,7 @@
 
 
     <div *ngIf="dataSource1?.filteredData?.length>0" class="col-md-5" style="clear: both;">
-      <mat-form-field  style="font-size: x-small;float:right" appearance="outline">
+      <mat-form-field class="input-parent"  style="font-size: x-small;float:right" appearance="outline">
         <mat-label>Actions</mat-label>
         <mat-select (selectionChange)="importTransAction()" name="cmbaction" [(value)]="selectedAction">
           <mat-option>-Select Action-</mat-option>
@@ -165,7 +165,7 @@
         </tr>
 
       </table>
-    <mat-paginator [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons> </mat-paginator>
+    <mat-paginator  [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons> </mat-paginator>
   </div>
 
 

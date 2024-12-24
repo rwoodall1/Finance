@@ -21,6 +21,9 @@ $my-app-theme: mat.m2-define-light-theme((color: ( primary: $my-app-primary, acc
 
 @include mat.all-component-themes($my-app-theme);
 
+.input-parent {
+  @include mat.form-field-density(-5);
+}
 body{
     color:black;
 }

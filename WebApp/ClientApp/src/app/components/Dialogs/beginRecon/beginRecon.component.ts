@@ -76,6 +76,12 @@ export class BeginReconComponent implements OnInit{
         return;
       }
       this.balances = dataresponse.data;
+      if (!this.balances) {
+        this.loaded = true;
+        this.spinner.hide();
+        this.reconcileInformation.reconciledBalance = 0;
+        return;
+      }
       this.setReconciliationData();
    
       
@@ -104,17 +110,18 @@ export class BeginReconComponent implements OnInit{
 
   }
   getAccounts() {
-    this.accountService.sysAccounts().subscribe(response => {
+    this.accountService.getBankAccounts().subscribe(response => {
       const dataresponse: ApiProcessingResult<Array<any>> = response.apiProcessingResult;
       if (dataresponse.isError) {
         this.Notification.displayError(dataresponse.errors[0].errorMessage);
-
+        this.spinner.hide
         return;
       }
 
       this.accountList = dataresponse.data;
+    });
 
-    })
+
   }
   currencyInputChanged(value) {
     var num = value.replace(/[$,]/g, "");
