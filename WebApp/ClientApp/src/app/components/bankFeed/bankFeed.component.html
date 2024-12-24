@@ -100,7 +100,7 @@
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element">
 
-            <mat-form-field style="font-size: x-small" appearance="outline">
+            <mat-form-field class="input-parent" style="margin-top:15px;font-size: x-small" appearance="outline">
               <mat-label>Payee</mat-label>
               <mat-select name="payee" #payee="ngModel" [(ngModel)]="element.payeeId">
                 <mat-optgroup *ngFor="let name of nameList" [disabled]="name.disabled">
@@ -126,7 +126,7 @@
           <th mat-header-cell *matHeaderCellDef> Account </th>
           <td mat-cell *matCellDef="let element">
 
-            <mat-form-field style="font-size: x-small" appearance="outline">
+            <mat-form-field class="input-parent" style="margin-top: 15px; font-size: x-small" appearance="outline">
               <mat-label>Account</mat-label>
               <mat-select required name="account" #account="ngModel" [(ngModel)]="element.childAccountId">
                 <mat-optgroup *ngFor="let type of accountList" [disabled]="type.disabled" >
