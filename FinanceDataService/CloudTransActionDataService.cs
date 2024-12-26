@@ -225,9 +225,9 @@ namespace DataService
             processingResult.Data = dataResult;
             return processingResult;
         }
-        public async Task<ApiProcessingResult<List<NameListModel>>>? GetNameList(string nameType)
+        public async Task<ApiProcessingResult<List<CompleteNameModel>>>? GetNameList(string nameType)
         {
-            var processingResult = new ApiProcessingResult<List<NameListModel>>();
+            var processingResult = new ApiProcessingResult<List<CompleteNameModel>>();
 
             var result = await new RESTService().MakeRESTCall("GET", "data", "URL");
 
@@ -237,7 +237,7 @@ namespace DataService
 
                 return null;
             }
-            var dataResult = JsonSerializer.Deserialize<List<NameListModel>>(result.Data.APIResult);
+            var dataResult = JsonSerializer.Deserialize<List<CompleteNameModel>>(result.Data.APIResult);
             processingResult.Data = dataResult;
             return processingResult;
         }

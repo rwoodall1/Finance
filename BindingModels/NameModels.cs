@@ -28,10 +28,17 @@ namespace BindingModels
 
 
     }
-    public class NameListModel
+    public class CompleteNameModel
     {
-        public string FullName { get; set; }  
+        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string NameType { get; set; }
+        public string EmailAddress { get; set; }
+        public string PhoneNumber { get; set; }
+        public string MobilePhone { get; set; } 
         public string Notes { get; set; }
+        public bool InActive { get; set; }
         public int Id { get; set; }
     }
     public class NameLkpModel

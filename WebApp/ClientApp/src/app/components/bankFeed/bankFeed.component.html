@@ -28,10 +28,10 @@
       <input class="form-control" [disabled]="currentBankId?.length<1" style=" margin-top:7px;font-size:x-small" (change)="this.onFilechange($event)" type="file" id="formFile">
     </div>
 
-      <div class="col-md-2">
-        
-        <button style="font-size:x-small" (click)="this.upload()" type="button" class="btn btn-primary  ">Upload</button>
-      </div>
+    <div class="col-md-2">
+      <button style="font-size:x-small" mat-button (click)="this.upload()" mat-raised-button color="primary">Upload</button>
+   
+    </div>
 
 
 

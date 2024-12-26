@@ -801,13 +801,13 @@ namespace DataService
 
             return processingResult;
         }
-        public async Task<ApiProcessingResult<List<NameListModel>>>? GetNameList(string nameType)
+        public async Task<ApiProcessingResult<List<CompleteNameModel>>>? GetNameList(string nameType)
         {
-            var processingResult=new ApiProcessingResult<List<NameListModel>>();
+            var processingResult=new ApiProcessingResult<List<CompleteNameModel>>();
             _client.ClearParameters();
             _client.CommandText(@"Select Id,FullName,Notes From Names where NameType=@NameType order By FullName");
             _client.AddParameter("@NameType", nameType);
-            var selectResult = _client.SelectMany<NameListModel>();
+            var selectResult = _client.SelectMany<CompleteNameModel>();
             if (selectResult.IsError)
             {
                 Log.Error("Failed to retrieve names:" + selectResult.Errors[0].DeveloperMessage);
@@ -815,7 +815,7 @@ namespace DataService
                 processingResult.Errors.Add(new ApiProcessingError("Failed to retrieve name:" + selectResult.Errors[0].DeveloperMessage, "Failed to retrieve name:" + selectResult.Errors[0].DeveloperMessage,""));
                 return processingResult; ;
             }
-            var data = (List<NameListModel>)selectResult.Data;
+            var data = (List<CompleteNameModel>)selectResult.Data;
             processingResult.Data = data;
             return processingResult;
         }

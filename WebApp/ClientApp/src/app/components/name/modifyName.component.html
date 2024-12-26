@@ -1,0 +1,82 @@
+
+<form role="form" class="form-horizontal" name="modifyNameForm" #modifyNameForm="ngForm" novalidate>
+
+  <div *ngIf="loaded">
+   
+    <div class="col-md-7">
+      <h3>Edit Name</h3>
+      <hr />
+
+      {{name.fullName}}---
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <input matInput placeholder="Name"
+               [(ngModel)]="otherName.fullName"
+               name="name"
+               #name="ngModel"
+               required>
+        <mat-error *ngIf="!name.pristine && name.errors?.required">Value is required</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name"
+               [(ngModel)]="otherName.firstName"
+               name="firstName"
+               #firstName="ngModel"
+               required>
+        <mat-error *ngIf="!firstName.pristine && firstName.errors?.required">Value is required</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Name"
+               [(ngModel)]="otherName.lastName"
+               name="lastName"
+               #lastName="ngModel"
+               required>
+        <mat-error *ngIf="!lastName.pristine && lastName.errors?.required">Value is required</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Name"
+               [(ngModel)]="otherName.phoneNumber"
+               name="phoneNumber"
+               #phoneNumber="ngModel"
+               required>
+        <mat-error *ngIf="!phoneNumber.pristine && phoneNumber.errors?.required">Value is required</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>MobilePhone</mat-label>
+        <input matInput placeholder="Name"
+               [(ngModel)]="otherName.mobilePhone"
+               name="mobilePhone"
+               #mobilePhone="ngModel"
+               required>
+        <mat-error *ngIf="!mobilePhone.pristine && mobilePhone.errors?.required">Value is required</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="col-md-9" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="text" matInput placeholder="Description" [(ngModel)]="otherName.emailAddress" name="email" #email="ngModel">
+      </mat-form-field>
+      <br />
+     
+    </div>
+    </div>
+
+  <hr />
+  <div>
+    <!--<button style="margin-right:10px" type="button" class="btn btn-primary" [disabled]="saving" (click)="save(modifyAccountForm)">Save</button>
+    <button type="button" (click)="cancel()" class="btn btn-warning" [disabled]="saving" trns>Cancel</button>-->
+    <!--<button type="button" (click)="deleteAccount()" class="btn btn-danger" [disabled]="saving">Delete Account</button>-->
+  </div>
+
+
+</form>
+
+
+

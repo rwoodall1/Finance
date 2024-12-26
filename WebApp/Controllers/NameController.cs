@@ -15,7 +15,24 @@ namespace WebApp.Controllers
     [Route("api/names")]
     public class NameController : BaseController
     {
-        
+        [AuthorizeAttribute]
+        [HttpGet, Route("getOtherNames")]
+        public async Task<ActionResult> GetOtherNames()
+        {
+            var processingResult = new ApiProcessingResult<List<CompleteNameModel>>();
+            var result = await new NameService().GetOtherNames();
+            if (result.IsError)
+            {
+
+                processingResult.IsError = true;
+                processingResult.Errors = result.Errors;
+                return Ok(new { ApiProcessingResult = processingResult });
+            }
+           processingResult.Data = result.Data;
+           
+
+            return Ok(new { ApiProcessingResult = processingResult });
+        }
         [AuthorizeAttribute]
         [HttpGet, Route("getNames")]
         public async Task<ActionResult> GetNames()
@@ -36,9 +53,27 @@ namespace WebApp.Controllers
 
             return Ok(new { ApiProcessingResult = processingResult });
         }
+        [AuthorizeAttribute]
+        [HttpGet, Route("getName")]
+        public async Task<ActionResult> GetName(int id)
+        {
+            var processingResult = new ApiProcessingResult<CompleteNameModel>();
+            var result = await new NameService().GetOtherName(id);
+            if (result.IsError)
+            {
 
+                processingResult.IsError = true;
+                processingResult.Errors = result.Errors;
+                return Ok(new { ApiProcessingResult = processingResult });
+            }
+           
 
-       private List<DropDownNames> CreatDropNames(List<NameLkpModel> rawNames)
+            processingResult.Data =result.Data;
+
+            return Ok(new { ApiProcessingResult = processingResult });
+        }
+
+        private List<DropDownNames> CreatDropNames(List<NameLkpModel> rawNames)
         {
             var nameDropDownList = new List<DropDownNames>();
             var vendor = new List<NameList>();

@@ -10,12 +10,6 @@
       </a>
     </div>
 
-    <!--<div class="menuitem">
-
-    <button mat-button color="accent" [routerLink]="'/chartOfAccounts'"  >
-      Chart Of Accounts
-    </button>
-  </div>-->
 
     <div class="menuitem">
       <button [matMenuTriggerFor]="list" mat-button>
@@ -23,8 +17,10 @@
       </button>
       <mat-menu #list="matMenu">
         <button mat-menu-item [routerLink]="'/chartOfAccounts'">  Chart Of Accounts</button>
-
+        <button mat-menu-item [routerLink]="'/name'"> Other Names List</button>
+        <button mat-menu-item > Vendors</button>
       </mat-menu>
+     
     </div>
 
 

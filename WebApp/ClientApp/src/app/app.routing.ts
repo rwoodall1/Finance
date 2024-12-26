@@ -29,6 +29,7 @@ const appRoutes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'reconcile', loadChildren: () => import('./components/modules/reconcile.module').then(m => m.ReconcileModule) },
       { path: 'chartOfAccounts', loadChildren: () => import('./components/modules/chartofaccounts.module').then(m => m.ChartOfAccountsModule) },
+      { path: 'name', loadChildren: () => import('./components/modules/name.module').then(m => m.NameModule) },
       { path: 'profile', loadChildren: () => import('./components/modules/profile.module').then(m => m.ProfileModule) },
       { path: 'import', loadChildren: () => import('./components/modules/bankFeed.module').then(m => m.BankFeedModule) },
       

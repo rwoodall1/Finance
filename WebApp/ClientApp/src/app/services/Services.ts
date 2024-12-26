@@ -559,7 +559,13 @@ export class NameService extends BaseService {
     return this.get(this.baseUrl + 'getNames');
 
   }
+  getOtherNames() {
 
+    return this.get(this.baseUrl + 'getOtherNames');
+  }
+  getName(id) {
+    return this.get(this.baseUrl + 'getName?id='+id);
+  }
 }
 
 

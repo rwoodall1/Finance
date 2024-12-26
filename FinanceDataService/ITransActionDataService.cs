@@ -35,7 +35,7 @@ namespace DataService
 
         //Names
         public Task<ApiProcessingResult<NameModel>>? GetName(int id);
-        public Task<ApiProcessingResult<List<NameListModel>>>? GetNameList(string nameType);
+        public Task<ApiProcessingResult<List<CompleteNameModel>>>? GetNameList(string nameType);
         public Task<ApiProcessingResult<bool>> EditName(NameModel data);
         public Task<ApiProcessingResult<string>> AddName(NameModel data);
         public Task<ApiProcessingResult<RuleData>> GetNameAccountRuleData(string Name);
