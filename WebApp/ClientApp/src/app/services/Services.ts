@@ -564,10 +564,16 @@ export class NameService extends BaseService {
     return this.get(this.baseUrl + 'getOtherNames');
   }
   getName(id) {
-    return this.get(this.baseUrl + 'getName?id='+id);
+    return this.get(this.baseUrl + 'getName?id=' + id);
+  }
+  saveOtherName(otherName) {
+
+    return this.post(this.baseUrl + 'saveOtherName', otherName)
+  }
+  deleteOtherName(nameId) {
+    return this.get(this.baseUrl + 'deleteOtherName?nameId=' + nameId);
   }
 }
-
 
 
 

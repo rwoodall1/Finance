@@ -4,10 +4,10 @@
   <div *ngIf="loaded">
    
     <div class="col-md-7">
-      <h3>Edit Name</h3>
+      <h3>{{title}}</h3>
       <hr />
 
-      {{name.fullName}}---
+
       <mat-form-field class="col-md-9" appearance="outline">
         <mat-label>Full Name</mat-label>
         <input matInput placeholder="Name"
@@ -23,9 +23,8 @@
         <input matInput placeholder="First Name"
                [(ngModel)]="otherName.firstName"
                name="firstName"
-               #firstName="ngModel"
-               required>
-        <mat-error *ngIf="!firstName.pristine && firstName.errors?.required">Value is required</mat-error>
+               #firstName="ngModel">
+
       </mat-form-field>
       <br />
       <mat-form-field class="col-md-9" appearance="outline">
@@ -33,9 +32,7 @@
         <input matInput placeholder="Name"
                [(ngModel)]="otherName.lastName"
                name="lastName"
-               #lastName="ngModel"
-               required>
-        <mat-error *ngIf="!lastName.pristine && lastName.errors?.required">Value is required</mat-error>
+               #lastName="ngModel">
       </mat-form-field>
       <br />
       <mat-form-field class="col-md-9" appearance="outline">
@@ -43,9 +40,8 @@
         <input matInput placeholder="Name"
                [(ngModel)]="otherName.phoneNumber"
                name="phoneNumber"
-               #phoneNumber="ngModel"
-               required>
-        <mat-error *ngIf="!phoneNumber.pristine && phoneNumber.errors?.required">Value is required</mat-error>
+               #phoneNumber="ngModel">
+
       </mat-form-field>
       <br />
       <mat-form-field class="col-md-9" appearance="outline">
@@ -53,9 +49,8 @@
         <input matInput placeholder="Name"
                [(ngModel)]="otherName.mobilePhone"
                name="mobilePhone"
-               #mobilePhone="ngModel"
-               required>
-        <mat-error *ngIf="!mobilePhone.pristine && mobilePhone.errors?.required">Value is required</mat-error>
+               #mobilePhone="ngModel">
+
       </mat-form-field>
       <br />
 
@@ -64,15 +59,22 @@
         <input type="text" matInput placeholder="Description" [(ngModel)]="otherName.emailAddress" name="email" #email="ngModel">
       </mat-form-field>
       <br />
-     
+
+      <mat-checkbox name="clr1"
+                    [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="otherName.inActive">
+
+
+      </mat-checkbox>
+      InActive
     </div>
     </div>
 
   <hr />
   <div>
-    <!--<button style="margin-right:10px" type="button" class="btn btn-primary" [disabled]="saving" (click)="save(modifyAccountForm)">Save</button>
-    <button type="button" (click)="cancel()" class="btn btn-warning" [disabled]="saving" trns>Cancel</button>-->
-    <!--<button type="button" (click)="deleteAccount()" class="btn btn-danger" [disabled]="saving">Delete Account</button>-->
+    <button style="margin-right:10px" type="button" class="btn btn-primary" [disabled]="saving" (click)="save(modifyNameForm)">Save</button>
+    <button type="button" (click)="cancel()" class="btn btn-warning" [disabled]="saving" trns>Cancel</button>
+    <button type="button" (click)="deleteName()" class="btn btn-danger" [disabled]="saving">Delete Account</button>
   </div>
 
 

@@ -27,7 +27,7 @@ export class ModifyNameComponent {
   loaded: boolean;
   saving: boolean = false;
   addModify: string;
-  
+  title="Edit Name"
 
   constructor(private nodeService: NodeService,private nameService:NameService,public dialog: MatDialog, private router: Router,public Global: GlobalService, private Notification: NotificationService, ) {
     this.user = this.Global.getLoggedInUser();
@@ -42,6 +42,7 @@ export class ModifyNameComponent {
  
   addModifyName(id) {
     if (this.addModify == 'Modify') {
+      
       this.nameService.getName(id).subscribe(response => {
         const dataresponse: ApiProcessingResult<any> = response.apiProcessingResult;
 
@@ -56,6 +57,7 @@ export class ModifyNameComponent {
         this.loaded = true;
       })
     } else {
+      this.title='Add Name'
       this.otherName = new CompleteName();
       
       this.loaded = true;
@@ -63,22 +65,22 @@ export class ModifyNameComponent {
   }
   
   save(form:NgForm) {
-    //this.SetControlsDirty(form);
-    //if (form.valid) {
-    //  this.saving = true;
-    //  this.accountService.saveAccount(this.account).subscribe(response => {
-    //    const dataresponse: ApiProcessingResult<any> = response.apiProcessingResult;
-    //    if (dataresponse.isError) {
-    //      this.Notification.displayError(dataresponse.errors[0].errorMessage);
-    //      this.saving = false;
-    //      return;
-    //    }
-    //    this.saving = false;
-    //    this.Notification.displaySuccess("Account Saved")
-    //    this.router.navigateByUrl("/chartOfAccounts")
+    this.SetControlsDirty(form);
+    if (form.valid) {
+      this.saving = true;
+      this.nameService.saveOtherName(this.otherName).subscribe(response => {
+        const dataresponse: ApiProcessingResult<any> = response.apiProcessingResult;
+        if (dataresponse.isError) {
+          this.Notification.displayError(dataresponse.errors[0].errorMessage);
+          this.saving = false;
+          return;
+        }
+        this.saving = false;
+        this.Notification.displaySuccess("Name Saved")
+        this.router.navigateByUrl("/name")
 
-    //  })
-    //}
+      })
+    }
 
   }
   SetControlsDirty(form: NgForm) {
@@ -90,11 +92,22 @@ export class ModifyNameComponent {
  
   cancel() {
 
-    this.router.navigateByUrl('/chartOfAccounts')
+    this.router.navigateByUrl('/name')
 
   }
-  deleteAccount() {
+  deleteName() {
+    this.nameService.deleteOtherName(this.otherName.id).subscribe(response => {
+      const dataresponse: ApiProcessingResult<any> = response.apiProcessingResult;
+      if (dataresponse.isError) {
+        this.Notification.displayError(dataresponse.errors[0].errorMessage);
+        this.saving = false;
+        return;
+      }
+      this.saving = false;
+      this.Notification.displaySuccess("Name removed")
+      this.router.navigateByUrl("/name")
 
+    })
 
   }
 }

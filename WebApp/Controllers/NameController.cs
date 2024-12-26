@@ -72,7 +72,43 @@ namespace WebApp.Controllers
 
             return Ok(new { ApiProcessingResult = processingResult });
         }
+        [AuthorizeAttribute]
+        [HttpGet, Route("deleteOtherName")]
+        public async Task<ActionResult> DeleteOtherName(int nameId)
+        {
+            var processingResult = new ApiProcessingResult<CompleteNameModel>();
+            var result = await new NameService().DeleteOtherName(nameId);
+            if (result.IsError)
+            {
 
+                processingResult.IsError = true;
+                processingResult.Errors = result.Errors;
+                return Ok(new { ApiProcessingResult = processingResult });
+            }
+
+
+           
+
+            return Ok(new { ApiProcessingResult = processingResult });
+        }
+        [AuthorizeAttribute]
+        [HttpPost, Route("saveOtherName")]
+        public async Task<ActionResult> SaveOtherName(CompleteNameModel model)
+        {
+            var processingResult = new ApiProcessingResult<CompleteNameModel>();
+            var result = await new NameService().SaveOtherName(model);
+            if (result.IsError)
+            {
+
+                processingResult.IsError = true;
+                processingResult.Errors = result.Errors;
+                return Ok(new { ApiProcessingResult = processingResult });
+            }
+
+
+
+            return Ok(new { ApiProcessingResult = processingResult });
+        }
         private List<DropDownNames> CreatDropNames(List<NameLkpModel> rawNames)
         {
             var nameDropDownList = new List<DropDownNames>();
@@ -114,5 +150,7 @@ namespace WebApp.Controllers
 
             return nameDropDownList;
         }
+
+
     }
 }

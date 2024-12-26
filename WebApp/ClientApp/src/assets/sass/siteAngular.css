@@ -1,8 +1,9 @@
+
+
 * {
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+}}
 
 body {
   min-height: 100vh;
@@ -433,7 +434,7 @@ h1 {
 }
 
 .btn-primary {
-  background-color: #212529 !important;
+  background-color: #1A237E !important;
 }
 
 .btn-checkout {
